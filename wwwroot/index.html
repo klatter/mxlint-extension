@@ -51,13 +51,47 @@
             <table class="striped">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 5%;"><span>Severity</span></th>
-                        <th scope="col" style="width: 45%;"><span>Document</span></th>
-                        <th scope="col" style="width: 10%;"><span>Module</span></th>
-                        <th scope="col" style="width: 5%;"><span>Type</span></th>
-                        <th scope="col" style="width: 25%;"><span>Rule</span></th>
-                        <th scope="col" style="width: 5%;"><span>Category</span></th>
-                        <th scope="col" style="width: 5%;"><span>Status</span></th>
+                        <th scope="col" style="width: 5%;">
+                            <span>Severity</span>
+                            <select id="severityFilter">
+                                <option value="">Filter severity</option>
+                                <option value="LOW">LOW</option>
+                                <option value="MEDIUM">MEDIUM</option>
+                                <option value="high">HIGH</option>
+                            </select>
+                        </th>
+                        <th scope="col" style="width: 45%;">
+                            <span>Document</span>
+                            <input type="text" id="documentFilter" placeholder="Filter Document">
+                        </th>
+                        <th scope="col" style="width: 10%;">
+                            <span>Module</span>
+                            <input type="text" id="moduleFilter" placeholder="Filter Module">
+                        </th>
+                        <th scope="col" style="width: 5%;">
+                            <span>Type</span>
+                            <input type="text" id="typeFilter" placeholder="Filter Type">
+                        </th>
+                        <th scope="col" style="width: 25%;">
+                            <span>Rule</span>
+                            <input type="text" id="ruleFilter" placeholder="Filter Rule">
+                        </th>
+                        <th scope="col" style="width: 5%;">
+                            <span>Category</span>
+                            <input type="text" id="categoryFilter" placeholder="Filter Category">
+                        </th>
+                        <th scope="col" style="width: 5%;">
+                            <span>Status</span>
+                            <select id="statusFilter">
+                                <option value="">Filter Status</option>
+                                <option value="fail">Fail</option>
+                                <option value="pass">Pass</option>
+                                <option value="skip">Skip</option>
+                            </select>
+                        </th>
+                        <th scope="col" style="width: 5%;">
+                            <button id="resetFilters">Reset</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody id="testcases">

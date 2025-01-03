@@ -1,4 +1,3 @@
-
 document.filter = ["HIGH", "MEDIUM", "LOW"];
 
 function postMessage(message, data) {
@@ -295,6 +294,68 @@ async function refreshData() {
     document.hash = newHash;
 }
 
+function setupFilters() {
+    const severityFilter = document.getElementById('severityFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const documentFilter = document.getElementById('documentFilter');
+    const moduleFilter = document.getElementById('moduleFilter');
+    const typeFilter = document.getElementById('typeFilter');
+    const ruleFilter = document.getElementById('ruleFilter');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const resetFiltersButton = document.getElementById('resetFilters');
+    const tableBody = document.getElementById('testcases');
+
+    function filterTable() {
+        const severityValue = severityFilter.value.toUpperCase();
+        const statusValue = statusFilter.value.toLowerCase();
+        const documentValue = documentFilter.value.toLowerCase();
+        const moduleValue = moduleFilter.value.toLowerCase();
+        const typeValue = typeFilter.value.toLowerCase();
+        const ruleValue = ruleFilter.value.toLowerCase();
+        const categoryValue = categoryFilter.value.toLowerCase();
+
+        Array.from(tableBody.getElementsByTagName('tr')).forEach(row => {
+            const severityCell = row.cells[0].textContent.toUpperCase();
+            const documentCell = row.cells[1].textContent.toLowerCase();
+            const moduleCell = row.cells[2].textContent.toLowerCase();
+            const typeCell = row.cells[3].textContent.toLowerCase();
+            const ruleCell = row.cells[4].textContent.toLowerCase();
+            const categoryCell = row.cells[5].textContent.toLowerCase();
+            const statusCell = row.cells[6].textContent.toLowerCase();
+
+            const matchesSeverity = !severityValue || severityCell === severityValue;
+            const matchesStatus = !statusValue || statusCell === statusValue;
+            const matchesDocument = !documentValue || documentCell.includes(documentValue);
+            const matchesModule = !moduleValue || moduleCell.includes(moduleValue);
+            const matchesType = !typeValue || typeCell.includes(typeValue);
+            const matchesRule = !ruleValue || ruleCell.includes(ruleValue);
+            const matchesCategory = !categoryValue || categoryCell.includes(categoryValue);
+
+            row.style.display = matchesSeverity && matchesStatus && matchesDocument && matchesModule && matchesType && matchesRule && matchesCategory ? '' : 'none';
+        });
+    }
+
+    function resetFilters() {
+        severityFilter.value = '';
+        statusFilter.value = '';
+        documentFilter.value = '';
+        moduleFilter.value = '';
+        typeFilter.value = '';
+        ruleFilter.value = '';
+        categoryFilter.value = '';
+        filterTable();
+    }
+
+    severityFilter.addEventListener('change', filterTable);
+    statusFilter.addEventListener('change', filterTable);
+    documentFilter.addEventListener('input', filterTable);
+    moduleFilter.addEventListener('input', filterTable);
+    typeFilter.addEventListener('input', filterTable);
+    ruleFilter.addEventListener('input', filterTable);
+    categoryFilter.addEventListener('input', filterTable);
+    resetFiltersButton.addEventListener('click', resetFilters);
+}
+
 function init() {
     document.hash = "";
     document.data = {
@@ -305,6 +366,7 @@ function init() {
         refreshData();
     }
     renderData();
+    setupFilters();
 }
 
 
