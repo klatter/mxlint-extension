@@ -29,8 +29,8 @@ public class MxLint
         ExecutablePath = Path.Combine(CachePath, "mxlint-local.exe");
         LintResultsPath = Path.Combine(CachePath, "lint-results.json");
         RulesPath = Path.Combine(CachePath, "rules");
-        CLIBaseURL = "https://github.com/mxlint/mxlint-cli/releases/download/" + CLIVersion + "/";
-        RulesBaseURL = "https://github.com/mxlint/mxlint-rules/releases/download/" + RulesVersion + "/";
+        CLIBaseURL = "https://github.com/klatter/mxlint-cli/releases/download/" + CLIVersion + "/";
+        RulesBaseURL = "https://github.com/klatter/mxlint-rules/releases/download/" + RulesVersion + "/";
     }
 
     public async Task Lint()
